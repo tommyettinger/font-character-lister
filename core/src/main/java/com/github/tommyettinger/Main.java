@@ -27,7 +27,9 @@ public class Main extends ApplicationAdapter {
     @Override
     public void create() {
         String fontFileName = args[0];
-        FileHandle cmap = Gdx.files.local(fontFileName + ".cmap.txt");
+        FileHandle cmap = fontFileName.contains("/") || fontFileName.contains("\\")
+            ? Gdx.files.absolute(fontFileName + ".cmap.txt")
+            : Gdx.files.local(fontFileName + ".cmap.txt");
         System.out.println("Building character map...");
         StringBuilder sb = new StringBuilder(1024);
         sb.append("\"\\n");
